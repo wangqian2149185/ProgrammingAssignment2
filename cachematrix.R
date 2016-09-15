@@ -3,15 +3,17 @@
 ## the inverse of a supplied matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
-        m<-NULL
-	set<-function(y){
-	x<<-y
-	m<<-NULL
-	}
-	get<-function()x
-	setinverse<-function(solve)m<<-solve
-	getinverse<-function()m
-	list(set=set,get=get,setinverse=setinverse,getinverse=getinverse)
+     m <- NULL
+     set <- function(y) {
+          x <<- y
+          m <<- NULL
+     }
+     get <- function() x
+     setinverse <- function(solve) m <<- solve
+     getinverse <- function() m
+     list(set = set, get = get,
+          setinverse = setinverse,
+          getinverse = getinverse)
 }
 
 
@@ -19,15 +21,15 @@ makeCacheMatrix <- function(x = matrix()) {
 ## if not, calculate it and save the result to cache, then next time it can be retrieved directly from cache
 
 cacheSolve <- function(x, ...) {
-        m <- x$getinverse()
-        if(!is.null(m)) {
-                message("getting cached data")
-                return(m)
-        }
-        data <- x$get()
-        m <- inverse(data, ...)
-        x$setinverse(m)
-        m
+     m <- x$getinverse()
+     if(!is.null(m)) {
+          message("getting cached data")
+          return(m)
+     }
+     data <- x$get()
+     m <- inverse(data, ...)
+     x$setinverse(m)
+     m
 }
 
  my_matrix<-matrix(c(1,-1,1,2),2,2)              # an example, a invertible matrix my_traix
